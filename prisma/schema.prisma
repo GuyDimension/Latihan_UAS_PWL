@@ -3,7 +3,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -12,22 +11,23 @@ datasource db {
 }
 
 model organisasi {
-  id                Int @id @default(autoincrement())
-  nama_organisasi   String 
-  ketua_organisasi  String
-  no_kontak         Int
-  tahun_dibentuk    Int
-  pembina           String
+  id               Int        @id @default(autoincrement())
+  nama_organisasi  String
+  ketua_organisasi String
+  no_kontak        String
+  tahun_dibentuk   Int
+  pembina          String
+  kegiatans        kegiatan[]
 }
 
 model kegiatan {
-  id                  Int @id @default(autoincrement())
-  judul_kegiatan      String
-  id_organisasi       Int
-  tanggal_kegiatan    DateTime
-  lokasi              String
-  jenis_kegiatan      String
-  deskripsi_singkat   String
-  tautan_pendaftaran  String
+  id                 Int        @id @default(autoincrement())
+  judul_kegiatan     String
+  id_organisasi      Int
+  tanggal_kegiatan   DateTime
+  lokasi             String
+  jenis_kegiatan     String
+  deskripsi_singkat  String
+  tautan_pendaftaran String?
+  organisasi         organisasi @relation(fields: [id_organisasi], references: [id])
 }
-
